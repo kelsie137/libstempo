@@ -2089,7 +2089,7 @@ cdef class tempopulsar:
                 Umats = []
                 for ecorr in [e for k,e in self.noisemodel.items() if k.startswith('ecorr')]:
                     flags = numpy.where(self.flagvals(ecorr.flag)[mask]==ecorr.flagval,
-                                        self.flagvals(ecorr.flag), '')
+                                        self.flagvals(ecorr.flag)[mask], '')
                     _, U = utils.quantize_fast(toas, flags, dt=1.0)
                     Umats.append(U)
                     phi = numpy.ones(U.shape[1]) * (ecorr.val*1e-6)**2
